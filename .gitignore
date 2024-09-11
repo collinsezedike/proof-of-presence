@@ -74,5 +74,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .idx
-postcss.config.mjs
 pnpm-lock.yaml
