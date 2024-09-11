@@ -1,4 +1,4 @@
-import CreateCommunityPage from "./homepage/page";
+import CreateCommunityPage from "../components/homepage";
 
 
 export default function ProofOfPresence() {
