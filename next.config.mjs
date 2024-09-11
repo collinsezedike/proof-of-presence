@@ -4,7 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config, { dev, isServer }) => {
     // Only use MiniCssExtractPlugin on the client side production builds
     if (!isServer && !dev) {
       // Add the mini-css-extract-plugin to the webpack plugins
@@ -13,24 +13,16 @@ const nextConfig = {
         chunkFilename: 'static/css/[contenthash].css',
       }));
 
-      // Modify the css rule to use MiniCssExtractPlugin.loader
-      const cssRule = config.module.rules.find(rule => rule.test && rule.test.toString().includes('.css'));
-      if (cssRule) {
-        cssRule.use = [
+      // Modify the css loader configuration
+      const cssLoader = config.module.rules.find(
+        (rule) => rule.test && rule.test.toString().includes('css')
+      );
+      
+      if (cssLoader) {
+        cssLoader.use = [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
+          ...cssLoader.use.filter((loader) => loader.loader !== 'style-loader'),
         ];
-      } else {
-        // If no existing CSS rule is found, add a new one
-        config.module.rules.push({
-          test: /\.css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader',
-          ],
-        });
       }
     }
 
