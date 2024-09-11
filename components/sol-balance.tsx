@@ -1,4 +1,4 @@
-"'use client'"
+'use client'
 
 import { useState, useEffect } from 'react'
 import { Moon, Sun } from 'lucide-react'
@@ -6,23 +6,23 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function SolBalance() {
+export default function SolBalanceChecker() {
   const [darkMode, setDarkMode] = useState(true)
-  const [address, setAddress] = useState("''")
-  const [balance, setBalance] = useState("'sol'")
+  const [address, setAddress] = useState('')
+  const [balance, setBalance] = useState('sol')
 
   useEffect(() => {
-    document.documentElement.classList.toggle("'dark'", darkMode)
+    document.documentElement.classList.toggle('dark', darkMode)
   }, [darkMode])
 
   const handleCheckBalance = () => {
     // Here you would typically make an API call to check the actual balance
     // For this example, we'll just set a placeholder value
-    setBalance("'123.45 sol'")
+    setBalance('123.45 sol')
   }
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 ${darkMode ? "'bg-[#CCCCCC]'" : "'bg-[#CCCCCC]'"}`}>
+    <div className={`min-h-screen flex items-center justify-center p-4 ${darkMode ? 'bg-[#CCCCCC]' : 'bg-[#CCCCCC]'}`}>
       <Card className="w-full max-w-md bg-[#0F0F0F] text-[#F2F2F2]">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-2xl font-bold">Sol Balance</CardTitle>
