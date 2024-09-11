@@ -1,9 +1,10 @@
-import SolBalance from "@/components/sol-balance"
+import CreateCommunityPage from "./homepage/page";
+
 
 export default function ProofOfPresence() {
   return (
     <div>
-      <SolBalance />
+      <CreateCommunityPage />
     </div>
   )
 }

@@ -6,7 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function SolBalanceChecker() {
+
+interface SolBalanceProps {
+  onClose: () => void
+}
+
+export default function SolBalance({ onClose }: SolBalanceProps) {
   const [darkMode, setDarkMode] = useState(true)
   const [address, setAddress] = useState('')
   const [balance, setBalance] = useState('sol')
@@ -18,6 +23,7 @@ export default function SolBalanceChecker() {
   const handleCheckBalance = () => {
     // Here you would typically make an API call to check the actual balance
     // For this example, we'll just set a placeholder value
+    onClose()
     setBalance('123.45 sol')
   }
 
