@@ -1,6 +1,6 @@
 import React from "react";
 
-const CenterDiv = ({children})=>{
+const CenterDiv = ({children}:React.ReactNode)=>{
     return <div
         style={{
             border:'1px solid transparent',
