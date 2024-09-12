@@ -3,13 +3,3 @@
     width: 100%;
     flex-direction: column;
 }
-#create-community-form input{
-    width: 100%;
-    font-size: 18px;
-    padding: 8px 16px;
-    border: 1px solid black;
-    margin: 5px 0 15px;
-}
-#create-community-form label{
-    color: #f2f2f2;
-}

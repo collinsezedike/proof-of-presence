@@ -14,7 +14,6 @@ const Button=({innerText,handleClick}: ButtonProp )=>{
             borderRadius:'10px',
             fontSize:20,
             width:'100%',
-            color:'#F2F2F2',
             fontWeight:'700',
             textTransform:'capitalize',
             cursor:'pointer'
