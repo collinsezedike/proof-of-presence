@@ -14,7 +14,7 @@ const Index=()=>{
                 (!iscreateCommunityClicked) ? 
                 <Button innerText={'create community'} handleClick={HandleCreateCommunity}/> :
                 <div>
-                    <label htmlFor="">Enter Community Name</label>
+                    <label htmlFor="">Enter a Community Name</label>
                     <input type="text" />
                     <Button innerText='create' />
                 </div>
