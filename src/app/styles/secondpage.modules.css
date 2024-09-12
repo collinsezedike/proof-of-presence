@@ -1,0 +1,9 @@
+#second-page{
+    display: flex;
+    gap: 20px;
+}
+@media (max-width: 425px) {
+    #second-page{
+        flex-direction: column;
+    }   
+}
