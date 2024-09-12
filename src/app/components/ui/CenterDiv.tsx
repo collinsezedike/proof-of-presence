@@ -5,6 +5,7 @@ const CenterDiv = ({children}:React.ReactNode)=>{
         style={{
             width: 350,
             height: 350,
+            backgroundColor : '#0F0F0F',
             border:'1px solid transparent',
             borderRadius:'10px',
             display: 'flex',
