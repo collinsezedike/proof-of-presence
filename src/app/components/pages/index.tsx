@@ -3,7 +3,7 @@ import Button from '../ui/button'
 import '@/app/styles/index.modules.css'
 
 const Index=()=>{
-    const [iscreateCommunityClicked, setIsCreateCommunityClicked] = useState(true)
+    const [iscreateCommunityClicked, setIsCreateCommunityClicked] = useState(false)
 
     const HandleCreateCommunity = ()=>{
         setIsCreateCommunityClicked(!iscreateCommunityClicked)
