@@ -8,7 +8,7 @@ const CenterDivWrapper = ({ children }:WrapperProp)=>{
     return <div
         style={{
             width: 350,
-            height: 350,
+            minHeight: 350,
             padding: 25,
             backgroundColor : '#0F0F0F',
             border:'1px solid transparent',

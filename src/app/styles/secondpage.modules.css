@@ -2,6 +2,12 @@
     display: flex;
     gap: 20px;
 }
+.fund-pool{
+    font-size: 15px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 5px 10px;
+}
 @media (max-width: 425px) {
     #second-page{
         flex-direction: column;

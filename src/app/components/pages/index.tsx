@@ -16,7 +16,7 @@ const Index=()=>{
                 <Button innerText={'create community'} handleClick={HandleCreateCommunity}/> :
                 <div id='create-community-form'>
                     <label htmlFor="">Enter a Community Name</label>
-                    <input type="text" />
+                    <input type="text" placeholder='Enter your community Name'/>
                     <Button innerText='create' />
                 </div>
             }
