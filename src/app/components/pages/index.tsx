@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../ui/button'
-import CenterDiv from '../ui/centerDiv
+import CenterDivWrapper from '@/app/components/ui/centerDivWrapper'
+import '@/app/styles/index.modules.css'
 
 const Index=()=>{
     const [iscreateCommunityClicked, setIsCreateCommunityClicked] = useState(false)
@@ -9,17 +10,17 @@ const Index=()=>{
         setIsCreateCommunityClicked(!iscreateCommunityClicked)
     }
     return (
-        <CenterDiv>
+        <CenterDivWrapper>
             { 
                 (!iscreateCommunityClicked) ? 
                 <Button innerText={'create community'} handleClick={HandleCreateCommunity}/> :
-                <div>
+                <div id='create-community-form'>
                     <label htmlFor="">Enter a Community Name</label>
                     <input type="text" />
                     <Button innerText='create' />
                 </div>
             }
-        </CenterDiv>
+        </CenterDivWrapper>
     )
 }
 
