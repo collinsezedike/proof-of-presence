@@ -1,3 +1,4 @@
+'use client';
 import Index from "./components/pages/index";
 
 export default function Home() {

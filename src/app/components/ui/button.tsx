@@ -1,10 +1,11 @@
 import React from "react";
 
 type ButtonProp = {
-    innerText : string;
+    innerText : string,
+    handleClick? : ()=> void
 };
 
-const Button=({innerText}: ButtonProp )=>{
+const Button=({innerText,handleClick}: ButtonProp )=>{
     return <button 
         style={{
             backgroundColor:'#173AD6',
@@ -12,10 +13,12 @@ const Button=({innerText}: ButtonProp )=>{
             border:'1px solid transparent',
             borderRadius:'10px',
             fontSize:20,
+            color:'#F2F2F2',
             fontWeight:'700',
             textTransform:'capitalize',
             cursor:'pointer'
         }}
+        onClick={handleClick}
     >
         {innerText}
     </button>
