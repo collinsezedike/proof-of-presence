@@ -12,6 +12,7 @@ const SecondPage=()=>{
     }
 
     const handleCreateCommunityEvent = ()=>{
+        setIsFundPoolClicked(false)
         setIsCreateCommunityEventClicked(!isCreateCommunityEventClicked)
     }
 

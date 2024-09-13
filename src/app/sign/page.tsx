@@ -1,5 +1,23 @@
-import ThirdPage from "../components/pages/thirdpage";
+'use client';
+import { useMemo } from "react"
+import ThirdPage from "../components/pages/thirdpage"
+import { ConnectionProvider,WalletProvider } from "@solana/wallet-adapter-react"
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base"
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
+import { clusterApiUrl } from "@solana/web3.js"
 
 export default function About() {
-    return <ThirdPage />
+
+    const network = WalletAdapterNetwork.Devnet
+    const endpoint = useMemo(()=>clusterApiUrl(network),[network])
+    const wallets = useMemo(()=>[],[network])
+    return (
+        <ConnectionProvider endpoint={endpoint}>
+            <WalletProvider wallets={wallets} autoConnect>
+                <WalletModalProvider>
+                    <ThirdPage />
+                </WalletModalProvider>
+            </WalletProvider>
+        </ConnectionProvider>
+    )
 }
