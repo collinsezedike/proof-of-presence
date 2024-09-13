@@ -11,6 +11,7 @@ export default function About() {
     const network = WalletAdapterNetwork.Devnet
     const endpoint = useMemo(()=>clusterApiUrl(network),[network])
     const wallets = useMemo(()=>[],[network])
+
     return (
         <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect>
