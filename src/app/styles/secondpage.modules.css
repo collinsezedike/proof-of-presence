@@ -8,7 +8,7 @@
     margin-top: 20px;
     padding: 5px 10px;
 }
-@media (max-width: 425px) {
+@media (max-width: 525px) {
     #second-page{
         flex-direction: column;
     }   
