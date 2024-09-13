@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "proof-of-presence",
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
           {children}
       </body>
