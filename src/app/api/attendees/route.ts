@@ -1,6 +1,5 @@
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
-import { useParams } from "next/navigation";
 import {
 	Connection,
 	Transaction,
@@ -17,7 +16,7 @@ export async function POST(req: NextApiRequest) {
 		let signer: PublicKey;
 		try {
 			signer = new PublicKey(req.body.account);
-		} catch (err: any) {
+		} catch (error) {
 			throw new Error(
 				"invalid signer account provided: not a valid public key"
 			);
@@ -60,9 +59,9 @@ export async function POST(req: NextApiRequest) {
 			},
 			{ status: 200 }
 		);
-	} catch (error: any) {
+	} catch (error) {
 		return NextResponse.json(
-			{ success: false, message: error.message },
+			{ success: false, message: error },
 			{ status: 400 }
 		);
 	}
