@@ -23,8 +23,9 @@ export async function POST(req: NextApiRequest) {
 			);
 		}
 
-		const params = useParams<{ eventId: string }>();
-		const event = await Event.findById(params.eventId);
+		const url = new URL(req.url!);
+		const eventId = url.searchParams.get("eventId");
+		const event = await Event.findById(eventId);
 		if (!event) throw new Error("invalid event id provided");
 
 		const community = await Community.findById(event.community);
