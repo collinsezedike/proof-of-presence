@@ -59,9 +59,9 @@ export async function POST(req: NextApiRequest) {
 			},
 			{ status: 200 }
 		);
-	} catch (error) {
+	} catch (error: any) {
 		return NextResponse.json(
-			{ success: false, message: error },
+			{ success: false, message: error.message },
 			{ status: 400 }
 		);
 	}
