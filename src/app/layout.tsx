@@ -1,11 +1,6 @@
-    import { useMemo } from "react"
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-// import { ConnectionProvider,WalletProvider } from "@solana/wallet-adapter-react"
-// import { WalletAdapterNetwork } from "@solana/wallet-adapter-base"
-// import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
-// import { clusterApiUrl } from "@solana/web3.js"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,24 +23,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const network = WalletAdapterNetwork.Devnet
-  // const endpoint = useMemo(()=>clusterApiUrl(network),[network])
-  // const wallets = useMemo(()=>[],[network])
 
   return (
     <html lang="en">
       <head>
         <meta name="dscvr:canvas:version" content="vNext" />
-        <meta name="og:image" content='/favicon.ico' />
+        <meta name="og:image" content='./favicon.ico' />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-      {/* <ConnectionProvider endpoint={endpoint}> */}
-            {/* <WalletProvider wallets={wallets} autoConnect> */}
-                {/* <WalletModalProvider> */}
         {children}
-        {/* </WalletModalProvider> */}
-            {/* </WalletProvider> */}
-        {/* </ConnectionProvider> */}
       </body>
     </html>
   );
