@@ -1,5 +1,4 @@
 import { SignJWT, jwtVerify } from "jose";
-import { randomBytes } from "crypto";
 
 const secretKey = process.env.JWT_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);

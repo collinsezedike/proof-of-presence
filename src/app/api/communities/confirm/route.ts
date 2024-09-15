@@ -1,15 +1,14 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 
 import { dbConnect } from "@/lib";
 import { Community } from "@/models";
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
 	try {
 		await dbConnect();
 
-		const { name, txnHash, keypair, payer } = req.body;
+		const { name, txnHash, keypair, payer } = await req.json();
 		if (!name?.trim()) {
 			throw new Error("community name wasn't provided");
 		} else if (!txnHash?.trim()) {
