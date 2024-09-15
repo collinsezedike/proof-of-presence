@@ -1,14 +1,13 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { dbConnect } from "@/lib";
 import { Community, Event } from "@/models";
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
 	try {
 		await dbConnect();
 
-		const { name, datetime, communityId } = req.body;
+		const { name, datetime, communityId } = await req.json();
 		if (!name?.trim()) {
 			throw new Error("Event name wasn't provided");
 		} else if (!communityId?.trim()) {

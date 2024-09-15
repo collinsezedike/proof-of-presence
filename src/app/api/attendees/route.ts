@@ -1,5 +1,4 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import {
 	Connection,
 	Transaction,
@@ -11,18 +10,20 @@ import {
 import { decryptJWT } from "@/lib";
 import { Community, Event } from "@/models";
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
 	try {
+		const { account } = await req.json();
+		if (!account) throw new Error("`account` field is required`");
 		let signer: PublicKey;
 		try {
-			signer = new PublicKey(req.body.account);
+			signer = new PublicKey(account);
 		} catch (error) {
 			throw new Error(
 				"invalid signer account provided: not a valid public key"
 			);
 		}
 
-		const url = new URL(req.url!);
+		const url = new URL(req.url);
 		const eventId = url.searchParams.get("eventId");
 		const event = await Event.findById(eventId);
 		if (!event) throw new Error("invalid event id provided");

@@ -1,5 +1,4 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import {
 	Connection,
 	Keypair,
@@ -14,7 +13,7 @@ import {
 import { dbConnect, encryptJWT } from "@/lib";
 import { Community } from "@/models";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
 	try {
 		await dbConnect();
 		const communities = await Community.find({});
@@ -30,11 +29,13 @@ export async function GET(req: NextApiRequest) {
 	}
 }
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
 	try {
+		const { account } = await req.json();
+		if (!account) throw new Error("`account` field is required`");
 		let payer: PublicKey;
 		try {
-			payer = new PublicKey(req.body.account);
+			payer = new PublicKey(account);
 		} catch (err: any) {
 			throw new Error(
 				"invalid payer account provided: not a valid public key"
