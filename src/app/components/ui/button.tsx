@@ -2,7 +2,7 @@ import React from "react";
 
 type ButtonProp = {
     innerText : string,
-    handleClick? : ()=> void
+    handleClick? : (e:React.FormEvent)=> void
 };
 
 const Button=({innerText,handleClick}: ButtonProp )=>{
