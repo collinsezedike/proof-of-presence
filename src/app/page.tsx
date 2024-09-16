@@ -6,6 +6,5 @@ export default function Home() {
 
   const walletInfo = useWallet()
 
-  console.log(walletInfo)
   return <Index />
 }

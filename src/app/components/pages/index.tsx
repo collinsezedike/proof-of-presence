@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../ui/button'
 import CenterDivWrapper from '@/app/components/ui/centerDivWrapper'
 import '@/app/styles/index.modules.css'
@@ -7,8 +7,13 @@ import { useWallet } from '@solana/wallet-adapter-react'
 
 const Index=()=>{
     const [iscreateCommunityClicked, setIsCreateCommunityClicked] = useState(false)
-
     const walletInfo = useWallet()
+    const [isWalletConnected, setIsWalletConnected] = useState(false)
+
+    useEffect(()=>{
+        setIsWalletConnected(walletInfo.connected)
+    },[walletInfo])
+    console.log(isWalletConnected)
 
     const HandleCreateCommunity = ()=>{
         setIsCreateCommunityClicked(!iscreateCommunityClicked)
@@ -16,11 +21,12 @@ const Index=()=>{
 
     return (
         <CenterDivWrapper>
+            {
+                (!isWalletConnected)?
             <WalletMultiButton style={{marginBottom:29}}>
                 {(!walletInfo.connected)&&"Add wallet"}
-            </WalletMultiButton>
-            { 
-                (!iscreateCommunityClicked) ? 
+            </WalletMultiButton> :
+                (!iscreateCommunityClicked && isWalletConnected) ? 
                 <Button innerText={'create community'} handleClick={HandleCreateCommunity}/> :
                 <div id='create-community-form'>
                     <label htmlFor="">Enter a Community Name</label>
