@@ -61,10 +61,6 @@ input{
     text-transform: capitalize;
 }
 
-.wallet-adapter-button:not([disabled]):focus-visible {
-    outline-color: white;
-}
-
 .wallet-adapter-button:not([disabled]):hover {
     background-color: #1a1f2e;
 }
@@ -120,7 +116,6 @@ input{
     opacity: 0;
     visibility: hidden;
     transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
-    font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .wallet-adapter-dropdown-list-active {
