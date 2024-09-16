@@ -9,13 +9,14 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"jose": "^5.8.0",
-		"mongodb": "^6.9.0",
-		"mongoose": "^8.6.2",
+		"@dscvr-one/canvas-client-sdk": "^1.1.1",
 		"@solana/wallet-adapter-base": "^0.9.23",
 		"@solana/wallet-adapter-react": "^0.15.35",
 		"@solana/wallet-adapter-react-ui": "^0.9.35",
 		"@solana/web3.js": "^1.95.3",
+		"jose": "^5.8.0",
+		"mongodb": "^6.9.0",
+		"mongoose": "^8.6.2",
 		"next": "14.2.10",
 		"react": "^18",
 		"react-dom": "^18"
