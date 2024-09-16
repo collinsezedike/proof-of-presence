@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="dscvr:canvas:version" content="vNext" />
-        <meta name="og:image" content='./favicon.ico' />
+        <meta name="og:image" content='/icon.png' />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
