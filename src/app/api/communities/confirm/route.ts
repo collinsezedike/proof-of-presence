@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 	try {
 		await dbConnect();
 
-		const { name, txnHash, keypair, payer } = await req.json();
+		const { name, txnHash, secretKey } = await req.json();
 		if (!name?.trim()) {
 			throw new Error("community name wasn't provided");
 		} else if (!txnHash?.trim()) {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
 		const newCommunity = await Community.create({
 			name,
-			keypair,
+			secretKey,
 			admin: feePayer,
 		});
 		return NextResponse.json(

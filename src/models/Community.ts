@@ -4,7 +4,7 @@ import { Keypair } from "@solana/web3.js";
 export interface Communities extends mongoose.Document {
 	name: string;
 	admin: string;
-	keypair: Keypair;
+	secretKey: string;
 }
 
 const CommunitySchema = new mongoose.Schema<Communities>({
@@ -18,8 +18,8 @@ const CommunitySchema = new mongoose.Schema<Communities>({
 		required: [true, "Please provide the community admin"],
 		maxlength: [60, "Community admin cannot be more than 60 characters"],
 	},
-	keypair: {
-		type: mongoose.Schema.Types.Mixed,
+	secretKey: {
+		type: String,
 		required: [true, "Please provide the community account"],
 	},
 });

@@ -5,6 +5,7 @@ import {
 	clusterApiUrl,
 	SystemProgram,
 	PublicKey,
+	Keypair,
 } from "@solana/web3.js";
 
 import { decryptJWT } from "@/lib";
@@ -29,22 +30,23 @@ export async function POST(req: NextRequest) {
 		if (!event) throw new Error("invalid event id provided");
 
 		const community = await Community.findById(event.community);
-		const payer: any = await decryptJWT(community.keypair);
-		if (!payer) throw new Error("invalid community keypair");
+		const secretKey: any = await decryptJWT(community.secretKey);
+		const payer = Keypair.fromSecretKey(secretKey);
+		if (!payer) throw new Error("invalid community secret key");
 
 		const CLUSTER_URL = process.env.RPC_URL ?? clusterApiUrl("devnet");
 		const connection = new Connection(CLUSTER_URL);
 		const { blockhash } = await connection.getLatestBlockhash();
 
 		const sendSOLIx = SystemProgram.transfer({
-			fromPubkey: payer,
+			fromPubkey: payer.publicKey,
 			toPubkey: signer,
 			lamports: 1_000,
 		});
 
 		const tx = new Transaction().add(sendSOLIx);
 		tx.recentBlockhash = blockhash;
-		tx.feePayer = payer;
+		tx.feePayer = payer.publicKey;
 		tx.sign(payer);
 
 		const serializedTransaction = tx
@@ -52,12 +54,7 @@ export async function POST(req: NextRequest) {
 			.toString("base64");
 
 		return NextResponse.json(
-			{
-				success: true,
-				data: {
-					txn: serializedTransaction,
-				},
-			},
+			{ success: true, data: { txn: serializedTransaction } },
 			{ status: 200 }
 		);
 	} catch (error: any) {

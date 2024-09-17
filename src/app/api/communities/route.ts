@@ -73,11 +73,14 @@ export async function POST(req: NextRequest) {
 		const tx = new VersionedTransaction(message);
 
 		const serializedTransaction = tx.serialize().toString();
-		const encryptedKeypair = await encryptJWT(keypair);
+		const encryptedSecretKey = await encryptJWT(keypair.secretKey);
 		return NextResponse.json(
 			{
 				success: true,
-				data: { txn: serializedTransaction, keypair: encryptedKeypair },
+				data: {
+					txn: serializedTransaction,
+					secretKey: encryptedSecretKey,
+				},
 			},
 			{ status: 200 }
 		);
