@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 		const connection = new Connection(CLUSTER_URL);
 
 		// Airdropping some SOL in order for the payer to be able to pay for gas
-		await connection.requestAirdrop(payer, 1 * LAMPORTS_PER_SOL);
+		// await connection.requestAirdrop(payer, 1 * LAMPORTS_PER_SOL);
 
 		const keypair = Keypair.generate();
 		const space = 0;
