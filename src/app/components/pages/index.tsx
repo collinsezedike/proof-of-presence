@@ -4,7 +4,7 @@ import CenterDivWrapper from '@/app/components/ui/centerDivWrapper'
 import '@/app/styles/index.modules.css'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { Transaction, Connection, clusterApiUrl, VersionedTransaction } from '@solana/web3.js';
+import { Transaction, Connection, clusterApiUrl, VersionedTransaction } from '@solana/web3.js'
 import axios from 'axios'
 
 const Index=()=>{
@@ -18,11 +18,10 @@ const Index=()=>{
     setInputValue(e.target.value);
   };
 
-    const walletInfo= useWallet()
+    const walletInfo = useWallet()
     
     const network = 'devnet'; // or 'testnet', 'mainnet-beta'
     const connection = new Connection(clusterApiUrl(network), 'confirmed');
-
 
     useEffect(()=>{
         setIsWalletConnected(walletInfo.connected)
@@ -44,21 +43,35 @@ const Index=()=>{
           
         try {
             const res = await axios.post('/api/communities',{account:walletAddress})
-            const txn = res.data.data.txn
-            if(txn !== ''){
+            const serializedtxn : Uint8Array = res.data.data.txn
+            if(serializedtxn){
                 try {
                     // Deserialize the transaction
-                    const serializedtxn = Buffer.from(txn, "base64")
-                    const deserializedtxn = VersionedTransaction.deserialize(serializedtxn)
-                    // console.log(deserializedtxn)
+                    const transaction = VersionedTransaction.deserialize(serializedtxn)
+
+                    // Get the latest blockhash
+                    const { blockhash } = await connection.getLatestBlockhash('finalized')
+
+                    // Modify the transaction message to set recent blockhash and fee payer
+                    const message = transaction.message
+
+                    // Add the fee payer to the list of account keys in the message
+                    const feePayerPubKey = walletInfo.publicKey!;
+                    if (!transaction.message.staticAccountKeys.includes(feePayerPubKey)) {
+                        transaction.message.staticAccountKeys.unshift(feePayerPubKey);
+                    }
+
+                    // Rebuild the versioned transaction
+                    const signedTransaction = new VersionedTransaction(message);
                     
                     // Sign the transaction
-                    console.log('wallet info', walletInfo)
+                    const signed= await walletInfo.signTransaction!(signedTransaction)
+
+                    //Extract the signature
+                    const signature = signed.signatures?.toString()
+
+                    console.log(signature)
                     
-                    // // Send the signed transaction
-                    // const signature = await connection.sendRawTransaction(signedTransaction.serialize());
-                    
-                    // console.log('Transaction signature:', signature)
                 }catch(error){
                     console.error('signature error is ',error)
                 }
