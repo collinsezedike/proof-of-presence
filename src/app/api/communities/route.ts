@@ -4,8 +4,7 @@ import {
 	Keypair,
 	clusterApiUrl,
 	SystemProgram,
-	TransactionMessage,
-	VersionedTransaction,
+	Transaction,
 	PublicKey,
 	LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
@@ -48,6 +47,7 @@ export async function POST(req: NextRequest) {
 		// Airdropping some SOL in order for the payer to be able to pay for gas
 		// await connection.requestAirdrop(payer, 1 * LAMPORTS_PER_SOL);
 
+		const { blockhash } = await connection.getLatestBlockhash();
 		const keypair = Keypair.generate();
 		const space = 0;
 		const lamports = await connection.getMinimumBalanceForRentExemption(
@@ -62,18 +62,15 @@ export async function POST(req: NextRequest) {
 			programId: SystemProgram.programId,
 		});
 
-		const { blockhash } = await connection.getLatestBlockhash();
+		const txn = new Transaction();
+		txn.add(createAccountIx);
+		txn.feePayer = payer;
+		txn.recentBlockhash = blockhash;
 
-		const message = new TransactionMessage({
-			payerKey: payer,
-			recentBlockhash: blockhash,
-			instructions: [createAccountIx],
-		}).compileToV0Message();
-
-		const tx = new VersionedTransaction(message);
-
-		const serializedTransaction = tx.serialize().toString();
-		const encryptedSecretKey = await encryptJWT({sk: keypair.secretKey});
+		const serializedTransaction = txn
+			.serialize({ requireAllSignatures: false })
+			.toString("base64");
+		const encryptedSecretKey = await encryptJWT({ sk: keypair.secretKey });
 		return NextResponse.json(
 			{
 				success: true,

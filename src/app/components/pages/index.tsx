@@ -48,9 +48,9 @@ const Index=()=>{
             if(txn !== ''){
                 try {
                     // Deserialize the transaction
-                    const serializetxn = Uint8Array.from(txn)
-                    const deserializetxn = VersionedTransaction.deserialize(serializetxn)
-                    // console.log(deserializetxn)
+                    const serializedtxn = Buffer.from(txn, "base64")
+                    const deserializedtxn = VersionedTransaction.deserialize(serializedtxn)
+                    // console.log(deserializedtxn)
                     
                     // Sign the transaction
                     console.log('wallet info', walletInfo)
